@@ -1,8 +1,10 @@
 import "./App.css";
 import {useState} from "react";
-const [bill, setBill] = useState(initialState:'');
+
 
 function App() {
+  const [bill, setBill] = useState('');
+  const [tip, setTip] = useState('10%')
   return (
     <div className="App">
       <div className="tip-contain">
@@ -10,7 +12,8 @@ function App() {
         <input type="text" placeholder={"0.00"} value={bill} 
         onChange={event => setBill(event.target.value)} />
         <label>Tip</label>
-        <input type="text" placeholder={"0.00"} />
+        <input type="text" placeholder={"0.00"} value={tip}
+         onChange={ event => setTip(event.target.value)}/>
         <div className="summary">
         <div className="split">
           <label>Split</label>
