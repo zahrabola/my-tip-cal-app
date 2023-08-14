@@ -49,6 +49,7 @@ input[type="text"]{
 button{
   margin: 5px;
   background-color: rgb(13, 13, 59);
+  cursor: pointer;
 }
 .summary label{
   line-height: 1rem;

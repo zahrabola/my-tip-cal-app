@@ -5,6 +5,16 @@ import {useState} from "react";
 function App() {
   const [bill, setBill] = useState('');
   const [tip, setTip] = useState('10%')
+  const [split, setSplit] = useState(1)
+
+  function handleTipChange(event) {
+    let value = event.target.value.replace('%','');
+    if (value.indexOf('%') === -1) {
+      value = value+'%';
+    }
+    setTip(value);
+  }
+ 
   return (
     <div className="App">
       <div className="tip-contain">
@@ -13,13 +23,13 @@ function App() {
         onChange={event => setBill(event.target.value)} />
         <label>Tip</label>
         <input type="text" placeholder={"0.00"} value={tip}
-         onChange={ event => setTip(event.target.value)}/>
+         onChange={handleTipChange}/>
         <div className="summary">
         <div className="split">
           <label>Split</label>
         <div className="split-control">
           <button> - </button>
-        <span> 1 </span>
+        <span> {split} </span>
           <button> + </button>
         </div>
         </div>
