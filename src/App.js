@@ -1,11 +1,12 @@
 import "./App.css";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 function App() {
   const [bill, setBill] = useState('');
-  const [tip, setTip] = useState('10%')
-  const [split, setSplit] = useState(1)
+  const [tip, setTip] = useState('10%');
+  const [split, setSplit] = useState(1);
+  const [splitTotal, setSplitTotal] = useState(0)
 
   function handleTipChange(event) {
     let value = event.target.value.replace('%','');
@@ -14,6 +15,10 @@ function App() {
     }
     setTip(value);
   }
+  function handleBillChange(e) {
+    setBill(e.target.value);
+  }
+  
   function splitPlus() {
     setSplit(oldValue => oldValue + 1);
   }
@@ -21,12 +26,24 @@ function App() {
  function splitMinus(){
 setSplit(oldValue => Math.max(oldValue -1, 1))
  }
+
+ function calculate(){
+  const percentage = 1 + parseInt(tip.replace('%', '')) / 100;
+  const result = (bill * percentage / split).toFixed(2);
+  setSplitTotal (result)
+ }
+useEffect(() => {
+
+  calculate()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [bill, tip, split])
+
   return (
     <div className="App">
       <div className="tip-contain">
         <label>Total Bill</label>
         <input type="text" placeholder={"0.00"} value={bill} 
-        onChange={event => setBill(event.target.value)} />
+        onChange={handleBillChange} />
         <label>Tip</label>
         <input type="text" placeholder={"0.00"} value={tip}
          onChange={handleTipChange}/>
@@ -41,7 +58,7 @@ setSplit(oldValue => Math.max(oldValue -1, 1))
         </div>
         <div className="result">
         <label>Split Total</label>
-        <span>200.00 </span>
+        <span>{splitTotal} </span>
       </div>
       </div>
       </div>
