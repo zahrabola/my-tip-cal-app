@@ -14,7 +14,13 @@ function App() {
     }
     setTip(value);
   }
- 
+  function splitPlus() {
+    setSplit(oldValue => oldValue + 1);
+  }
+
+ function splitMinus(){
+setSplit(oldValue => Math.max(oldValue -1, 1))
+ }
   return (
     <div className="App">
       <div className="tip-contain">
@@ -28,9 +34,9 @@ function App() {
         <div className="split">
           <label>Split</label>
         <div className="split-control">
-          <button> - </button>
+          <button onClick={splitMinus}> - </button>
         <span> {split} </span>
-          <button> + </button>
+          <button onClick={splitPlus}> + </button>
         </div>
         </div>
         <div className="result">
